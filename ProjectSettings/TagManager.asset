@@ -7,6 +7,7 @@ TagManager:
   - Test_groundlayer
   - Test_Pickaxe
   - Pickaxe
+  - Test_Rope
   layers:
   - Default
   - TransparentFX
