@@ -2,22 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
-* Class ExcavationTool
-* Parent Class for different types excavation tools,
-* to be overriden by child classes implementing different logics
-* according to each tool
-**/
-
-public class ExcavationTool : MonoBehaviour
+public class Tool : MonoBehaviour
 {
     #region variables
-    [SerializeField]
-    private bool isExcavating;
     public enum SelectedTool { Nothing, PickAxe, Shovel, PickHammer };
     public SelectedTool selectedtool;
-    public Vector3 lastMovement;
-    public float toolVelocity;
+    public Vector3 ToolVelocity;
     Vector3 OldPosition = Vector3.zero;
     #endregion
 
@@ -32,23 +22,15 @@ public class ExcavationTool : MonoBehaviour
 
     IEnumerator VelocityCalculation()
     {
-        while (Application.isPlaying)
+        while(Application.isPlaying)
         {
-            Vector3 OldPosition = transform.position;
-
+            Vector3 OldPosition = transform.position;  
+            
             yield return new WaitForEndOfFrame();
 
-            lastMovement = (OldPosition - transform.position) / Time.deltaTime;
-            toolVelocity = lastMovement.magnitude;
+            ToolVelocity = (OldPosition - transform.position) / Time.deltaTime;
 
-            if (toolVelocity > 3)
-            {
-                isExcavating = true;
-            }
-            else
-            {
-                isExcavating = false;
-            }
+            Debug.Log(ToolVelocity);
         }
     }
     #endregion
@@ -86,35 +68,6 @@ public class ExcavationTool : MonoBehaviour
 
         }
 
-    }
-    #endregion
-
-    #region get & set
-    public int getHardness()
-    {
-        switch (selectedtool)
-        {
-            case SelectedTool.Nothing:
-                return 0;
-                break;
-            case SelectedTool.PickAxe:
-                return 3;
-                break;
-            case SelectedTool.Shovel:
-                return 1;
-                break;
-            case SelectedTool.PickHammer:
-                return 2;
-                break;
-            default:
-                return -1;
-                break;
-        }
-    }
-
-    public bool getIsExcavating()
-    {
-        return isExcavating;
     }
     #endregion
 }

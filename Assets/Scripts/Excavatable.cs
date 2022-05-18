@@ -24,7 +24,7 @@ public class Excavatable : MonoBehaviour
         if (other.gameObject.CompareTag("ExcavationTool"))
         {
             //Check if excavation tool has required hardness
-            if(other.gameObject.GetComponent<ExcavationTool>().getHardness() >= this.hardness)
+            if(other.gameObject.GetComponent<ExcavationTool>().getHardness() >= this.hardness && other.gameObject.GetComponent<ExcavationTool>().getIsExcavating())
             {
                 //Progress excavation state
                 excavationState++;
